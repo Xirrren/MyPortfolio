@@ -1,0 +1,504 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    padding-top: 10vh;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* guide 頂層導覽列 */
+.guide {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10vh;
+    background: whitesmoke;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    z-index: 10000;
+}
+
+.guide-title {
+    position: relative;
+    width: 10vw;
+    min-width: 150px;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2vw;
+}
+
+.guide-title h1 {
+    font-size: 1.5rem;
+}
+
+.guide-box {
+    height: 10vh;
+    display: flex;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+    gap: 1vw;
+}
+
+.guide-box-card {
+    position: relative;
+    height: 10vh;
+    width: auto;
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.guide-box-card::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 8px;
+    width: 0%;
+    height: 5px;
+    background-color: rgba(99, 99, 113, 0.65);
+    transition: width 0.3s ease;
+}
+
+.guide-box-card:hover::after {
+    width: 100%;
+}
+
+.guide-box-card h3 {
+    font-size: 1rem;
+}
+
+/* 語言切換按鈕 */
+.lang-switch {
+    position: absolute;
+    right: 2vw;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#lang-toggle {
+    display: none;
+}
+
+.lang-btn {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    background: #ddd;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.lang-btn:hover {
+    background: #ccc;
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 預設顯示中文 */
+.en {
+    display: none;
+}
+
+/* 當切換到英文時 */
+#lang-toggle:checked ~ * .zh {
+    display: none;
+}
+
+#lang-toggle:checked ~ * .en {
+    display: block;
+}
+
+/* 隱藏 checkbox */
+#menu-toggle {
+    display: none;
+}
+
+/* 導覽列自適應按鈕 */
+.guide-toggle {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    user-select: none;
+}
+
+/* 響應式設計 */
+@media (max-width: 700px) {
+    .guide-box {
+        display: none;
+    }
+
+    .guide-toggle {
+        display: block;
+    }
+
+    /* 當 checkbox 被勾選時展開選單 */
+    #menu-toggle:checked ~ .guide-box {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        transform: none;
+        background: rgba(245, 245, 245, 0.8);
+        width: 100%;
+        height: auto;
+        padding: 0.5rem 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        gap: 0;
+    }
+
+    #menu-toggle:checked ~ .guide-box .guide-box-card {
+        width: 100%;
+        min-width: unset;
+        height: auto;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .guide-title {
+        width: auto;
+        min-width: unset;
+    }
+}
+
+.wrapper {
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.gap {
+    width: 100%;
+    height: 100px;
+}
+
+.title {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.title-text {
+    width: 100%;
+    position: relative;
+    height: 80px;
+    margin-left: 5vw;
+    font-size: 2em;
+    font-style: italic;
+}
+
+.title-wrapper {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: flex;
+    gap: 1.5vw;
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.title-box {
+    width: 400px;
+    aspect-ratio: 1.5 / 1;
+    display: flex;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+
+    transform: translateX(-250%);
+    animation: slideIn 1.5s ease forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-250%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.title-box-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.title-box-Text {
+    position: absolute;
+    bottom: 2.5vh;
+    left: 1.5vw;
+    font-size: 30px;
+    color: floralwhite;
+    opacity: 0.8;
+}
+
+.title-box-smallText {
+    font-size: 18px;
+    color: floralwhite;
+    opacity: 0.6;
+}
+
+.title-box:hover .title-box-img {
+    filter: grayscale(100%) brightness(0.9);
+    transform: scale(1.3);
+    transition: filter 0.8s ease, transform 0.8s ease;
+}
+
+.title-box:hover .title-box-Text {
+    opacity: 1;
+    transform: translateY(-3vh);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.namebox {
+    width: 450px;
+    height: 450px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.namebox-img {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 20px;
+    position: relative;
+}
+
+.namebox-GameImg {
+    height: 100%;
+    width: auto;
+    position: absolute;
+    display: flex;
+}
+
+.namebox-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.namebox h2 {
+    font-size: 2em;
+    margin: 0;
+    position: absolute;
+    bottom: 100px;
+}
+
+.namebox h3 {
+    font-size: 1.3em;
+    margin: 0;
+    position: absolute;
+    bottom: 70px;
+}
+
+.namebox h4 {
+    font-size: 1em;
+    margin: 0;
+    position: absolute;
+    bottom: 30px;
+}
+
+.namebox-describe {
+    width: 600px;
+    min-height: 200px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.namebox-describe p {
+    font-size: 25px;
+    width: 450px;
+    line-height: 1.5;
+}
+
+.namebox-describe-small {
+    font-size: 15px;
+    line-height: 1.1;
+}
+
+.namebox-btn {
+    width: 300px;
+    height: 45px;
+    color: white;
+    font-size: 20px;
+    background: linear-gradient(120deg, #dea2ff, #c48cff);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.namebox-btn:hover {
+    background: linear-gradient(120deg, #c48cff, #dea2ff);
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background-color: #ccc;
+    margin: 20px 0;
+}
+
+.linkArea {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.linkIcon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.linkIcon:hover {
+    transform: scale(1.2);
+    box-shadow: 0 8px 20px rgba(244, 244, 244, 0.33);
+    transition: transform 0.5s ease;
+
+}
+
+.BG {
+    width: 100%;
+    background: linear-gradient(180deg, #f5fffd, #cce2ff, #b4d3ff, #d8d4ff, #b0d3ff, #cce2ff);
+    background-size: 400% 400%;
+    animation: gradientFlow 20s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 50% 0%;
+    }
+    50% {
+        background-position: 50% 100%;
+    }
+    100% {
+        background-position: 50% 0%;
+    }
+}
+
+.infoSection {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgb(46, 46, 46);
+}
+
+.infoSection h2 {
+    font-size: 2.4em;
+    color: whitesmoke;
+
+}
+
+.infoSection h3 {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: whitesmoke;
+}
+
+hr {
+    align-self: stretch;
+    width: 100%;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+.project-wrapper {
+    width: 100%;
+    display: flex;
+}
+
+.project-guide {
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background: linear-gradient(180deg, #eef6ff, #e8f0ff);
+    z-index: 1000;
+}
+
+.project-box {
+    width: 20vw;
+    height: 80px;
+    border-radius: 20px;
+
+    overflow: hidden;
+    position: relative;
+}
+
+.project-box-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-box:hover .project-box-img {
+    filter: grayscale(100%) brightness(0.9);
+    transform: scale(1.3);
+    transition: filter 0.8s ease, transform 0.8s ease;
+}
+
+.project-box-Txt {
+    color: whitesmoke;
+    opacity: 0.8;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+.box-reverse {
+    position: absolute;
+    width: 500px;
+    aspect-ratio: 1.5 / 1;
+    background: linear-gradient(180deg, rgba(238, 246, 255, 0), rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.99));
+}
