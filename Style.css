@@ -225,7 +225,7 @@ a {
 }
 
 .title-box {
-    width: 400px;
+    width: 350px;
     aspect-ratio: 1.5 / 1;
     display: flex;
     border-radius: 20px;
@@ -333,7 +333,7 @@ a {
 }
 
 .namebox-describe {
-    width: 600px;
+    width: 450px;
     min-height: 200px;
     flex-shrink: 0;
     display: flex;
@@ -345,7 +345,7 @@ a {
 
 .namebox-describe p {
     font-size: 25px;
-    width: 450px;
+    width: 350px;
     line-height: 1.5;
 }
 
