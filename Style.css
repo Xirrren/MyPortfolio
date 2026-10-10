@@ -256,7 +256,7 @@ a {
     position: absolute;
     bottom: 2.5vh;
     left: 1.5vw;
-    font-size: 30px;
+    font-size: 22px;
     color: floralwhite;
     opacity: 0.8;
 }
@@ -344,7 +344,7 @@ a {
 }
 
 .namebox-describe p {
-    font-size: 25px;
+    font-size: 20px;
     width: 350px;
     line-height: 1.5;
 }
